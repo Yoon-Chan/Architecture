@@ -57,9 +57,15 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
+
+
+
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
 
     //Moshi
@@ -78,4 +84,7 @@ dependencies {
 
     //viewModelScope
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+
+    //Coil
+    implementation("io.coil-kt:coil:2.4.0")
 }
