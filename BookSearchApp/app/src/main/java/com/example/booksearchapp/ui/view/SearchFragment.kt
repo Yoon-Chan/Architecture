@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.booksearchapp.databinding.FragmentSearchBinding
 import com.example.booksearchapp.ui.adapter.BookSearchAdapter
@@ -52,6 +53,10 @@ class SearchFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
+        bookSearchAdapter.setOnItemClickListener {
+            val action = SearchFragmentDirections.actionFragmentSearchToFragmentBook(it)
+            findNavController().navigate(action)
+        }
     }
 
     private fun searchBooks() {

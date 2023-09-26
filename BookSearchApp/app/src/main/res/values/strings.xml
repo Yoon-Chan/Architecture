@@ -4,4 +4,6 @@
     <string name="search">Search Books</string>
     <string name="favorite">Favorite Books</string>
     <string name="settings">Setting</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="book_info">Book Info</string>
 </resources>

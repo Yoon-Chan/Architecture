@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupJetpackNavigstion(){
-        val host = supportFragmentManager.findFragmentById(R.id.booksearch_nav_host_fragment) as NavHostFragment ?: return
+        val host = supportFragmentManager.findFragmentById(R.id.booksearch_nav_host_fragment) as NavHostFragment
         navController = host.navController
         binding.bottomNavigationView.setupWithNavController(navController)
 

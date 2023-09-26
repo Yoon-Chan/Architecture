@@ -10,6 +10,9 @@ import com.example.booksearchapp.databinding.ItemBookPreviewBinding
 class BookSearchAdapter : ListAdapter<Book, BookSearchViewHolder>(BookDiffCallback) {
     override fun onBindViewHolder(holder: BookSearchViewHolder, position: Int) {
         holder.bind(currentList[position])
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let { it(currentList[position]) }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookSearchViewHolder {
@@ -20,6 +23,11 @@ class BookSearchAdapter : ListAdapter<Book, BookSearchViewHolder>(BookDiffCallba
                 false
             )
         )
+    }
+
+    private var onItemClickListener : ((Book) -> (Unit))? = null
+    fun setOnItemClickListener(listener: (Book)->(Unit)) {
+        onItemClickListener = listener
     }
 
 
