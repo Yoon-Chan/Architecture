@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.booksearchapp.databinding.FragmentBookBinding
+import com.example.booksearchapp.ui.viewmodel.BookSearchViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class BookFragment : Fragment() {
 
@@ -16,6 +19,7 @@ class BookFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args by navArgs<BookFragmentArgs>()
+    private val viewModel : BookSearchViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +39,11 @@ class BookFragment : Fragment() {
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
             loadUrl(book.url)
+        }
+
+        binding.fabFavorite.setOnClickListener {
+            viewModel.saveBook(book)
+            Snackbar.make(view, "book has saved", Snackbar.LENGTH_SHORT).show()
         }
 
     }

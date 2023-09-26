@@ -1,10 +1,12 @@
 package com.example.booksearchapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.booksearchapp.data.model.Book
 import com.example.booksearchapp.data.model.SearchResponse
 import com.example.booksearchapp.data.repository.BookSearchRepository
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +29,18 @@ class BookSearchViewModel(
         }
     }
 
+    //데이터 베이스 사용(Room)
+    fun saveBook(book: Book) = viewModelScope.launch(Dispatchers.IO) {
+        Log.d("DEBUG", "saveBook")
+        bookSearchRepository.insertBooks(book)
+    }
+
+    fun deleteBook(book: Book) = viewModelScope.launch(Dispatchers.IO) {
+        bookSearchRepository.deleteBooks(book)
+    }
+
+    val favoriteBooks: LiveData<List<Book>> = bookSearchRepository.getFavoriteBooks()
+    //Room 끝
     var query = String()
         set(value) {
             field = value
