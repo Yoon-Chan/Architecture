@@ -30,8 +30,18 @@
 __실행 결과__
 
 
-
-
 https://github.com/Yoon-Chan/Architecture/assets/56026214/c74d8645-4620-43a2-bb79-632c8d7ce589
 
 
+
+#### 검색 클릭 시 웹 뷰 이동
+
++ 사용 기술
+  + jetpack navigation
+  + webView
++ 검색하고 나온 리스트들을 클릭 시 해당 책에 맞는 url로 이동하는 기능 구현
++ 여기서 배운 점
+  + 앱바와 jetpack navigation을 연결하는 방법을 알았다. (AppBarConfiguration), 다만 이걸 사용하려면 AppBar가 있어야 사용이 가능
+  + 프래그먼트 이동 시 args를 받아 사용하는 방법을 배움(Parcelable을 이용해 데이터 클래스 전달)
+
+__실행 결과__
