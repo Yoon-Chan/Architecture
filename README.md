@@ -45,3 +45,8 @@ https://github.com/Yoon-Chan/Architecture/assets/56026214/c74d8645-4620-43a2-bb7
   + 프래그먼트 이동 시 args를 받아 사용하는 방법을 배움(Parcelable을 이용해 데이터 클래스 전달)
 
 __실행 결과__
+
+
+
+https://github.com/Yoon-Chan/Architecture/assets/56026214/b773b894-2dcd-4f4d-b5d8-586c286bd1fc
+
