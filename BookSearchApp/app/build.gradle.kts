@@ -84,6 +84,7 @@ dependencies {
 
     //viewModelScope
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2")
 
     //Coil
     implementation("io.coil-kt:coil:2.4.0")
