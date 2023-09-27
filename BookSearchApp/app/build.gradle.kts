@@ -100,8 +100,11 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.0")
     annotationProcessor("androidx.room:room-compiler:2.5.0")
     ksp("androidx.room:room-compiler:2.5.0")
+    implementation("androidx.room:room-paging:2.5.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    implementation("androidx.paging:paging-runtime:3.1.1")
 }
