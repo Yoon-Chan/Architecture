@@ -1,7 +1,9 @@
 package com.example.booksearchapp.ui.view
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -16,6 +18,7 @@ import com.example.booksearchapp.data.repository.BookSearchRepositoryImpl
 import com.example.booksearchapp.databinding.ActivityMainBinding
 import com.example.booksearchapp.ui.viewmodel.BookSearchViewModel
 import com.example.booksearchapp.ui.viewmodel.BookSearchViewModelProviderFactory
+import com.example.booksearchapp.util.Constant.DATASTORE_NAME
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController : NavController
     private lateinit var appBarConfiguration : AppBarConfiguration
+
+    private val Context.dataStore by preferencesDataStore(DATASTORE_NAME)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setupJetpackNavigstion()
 
         val bookSearchDatabase = BookSearchDatabase.getInstance(this)
-        val bookSearchRepository = BookSearchRepositoryImpl(bookSearchDatabase)
+        val bookSearchRepository = BookSearchRepositoryImpl(bookSearchDatabase, dataStore)
         val factory = BookSearchViewModelProviderFactory(bookSearchRepository, this)
         bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java]
 
