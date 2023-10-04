@@ -13,8 +13,11 @@ import com.example.booksearchapp.data.model.SearchResponse
 import com.example.booksearchapp.data.repository.BookSearchRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -69,7 +72,7 @@ class BookSearchViewModel(
 
 
     //DataStore
-    fun saveSortMode(value : String) = viewModelScope.launch(Dispatchers.IO) {
+    fun saveSortMode(value: String) = viewModelScope.launch(Dispatchers.IO) {
         bookSearchRepository.saveSortMode(value)
     }
 
@@ -78,8 +81,22 @@ class BookSearchViewModel(
     }
 
     //paging
-    val favoritePagingBooks : StateFlow<PagingData<Book>> =
+    val favoritePagingBooks: StateFlow<PagingData<Book>> =
         bookSearchRepository.getFavoritePagingBooks()
             .cachedIn(viewModelScope)
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
+
+
+    private val _searchPagingResult = MutableStateFlow<PagingData<Book>>(PagingData.empty())
+    val searchPagingResult: StateFlow<PagingData<Book>> = _searchPagingResult.asStateFlow()
+
+    fun searchBooksPaging(query: String) {
+        viewModelScope.launch {
+            bookSearchRepository.searchBooksPaging(query, getSortMode())
+                .cachedIn(viewModelScope)
+                .collect {
+                    _searchPagingResult.value = it
+                }
+        }
+    }
 }
