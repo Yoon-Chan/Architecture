@@ -1,36 +1,29 @@
 package com.example.booksearchapp.ui.view
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.booksearchapp.R
 import com.example.booksearchapp.databinding.FragmentFavoriteBinding
-import com.example.booksearchapp.ui.adapter.BookSearchAdapter
 import com.example.booksearchapp.ui.adapter.BookSearchPagingAdapter
-import com.example.booksearchapp.ui.viewmodel.BookSearchViewModel
+import com.example.booksearchapp.ui.viewmodel.FavoriteViewModel
 import com.example.booksearchapp.util.collectLatestStateFlow
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class FavoriteFragment : Fragment() {
     private var _binding : FragmentFavoriteBinding? = null
     private val binding get() =  _binding!!
-    private val viewModel : BookSearchViewModel by activityViewModels()
+    //private val viewModel : BookSearchViewModel by activityViewModels()
+    private val viewModel by viewModels<FavoriteViewModel>()
    //private lateinit var bookSearchAdapter : BookSearchAdapter
     private lateinit var bookSearchAdapter: BookSearchPagingAdapter
 
