@@ -12,9 +12,11 @@ import com.example.booksearchapp.R
 import com.example.booksearchapp.databinding.FragmentSettingsBinding
 import com.example.booksearchapp.ui.viewmodel.BookSearchViewModel
 import com.example.booksearchapp.util.Sort
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment() {
     private var _binding : FragmentSettingsBinding? = null
     private val binding get() =  _binding!!

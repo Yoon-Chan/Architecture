@@ -3,13 +3,14 @@ package com.example.booksearchapp.data.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import coil.network.HttpException
-import com.example.booksearchapp.data.api.RetrofitInstance.api
+import com.example.booksearchapp.data.api.BookSearchApi
 import com.example.booksearchapp.data.model.Book
 import com.example.booksearchapp.util.Constant.PAGING_SIZE
-
 import okio.IOException
 
-class BookSearchPagingSource(
+
+class BookSearchPagingSource (
+    private val api : BookSearchApi,
     private val query: String,
     private val sort: String,
 

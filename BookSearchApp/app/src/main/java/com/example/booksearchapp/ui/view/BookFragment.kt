@@ -12,7 +12,9 @@ import androidx.navigation.fragment.navArgs
 import com.example.booksearchapp.databinding.FragmentBookBinding
 import com.example.booksearchapp.ui.viewmodel.BookSearchViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BookFragment : Fragment() {
 
     private var _binding: FragmentBookBinding? = null
