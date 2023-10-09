@@ -2,6 +2,7 @@ package com.example.booksearchapp.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -12,6 +13,7 @@ import com.example.booksearchapp.data.api.RetrofitInstance.api
 import com.example.booksearchapp.data.db.BookSearchDatabase
 import com.example.booksearchapp.data.model.Book
 import com.example.booksearchapp.data.model.SearchResponse
+import com.example.booksearchapp.data.repository.BookSearchRepositoryImpl.PreferencesKeys.CACHE_DELETE_MODE
 import com.example.booksearchapp.data.repository.BookSearchRepositoryImpl.PreferencesKeys.SORT_MODE
 import com.example.booksearchapp.util.Constant.PAGING_SIZE
 import com.example.booksearchapp.util.Sort
@@ -36,6 +38,11 @@ class BookSearchRepositoryImpl(
     }
 
 
+    private object PreferencesKeys {
+        val SORT_MODE = stringPreferencesKey("sort_mode")
+        val CACHE_DELETE_MODE = booleanPreferencesKey("cache_delete_mode")
+    }
+
     override suspend fun insertBooks(book: Book) {
         db.bookSearchDao().insertBook(book)
     }
@@ -44,13 +51,9 @@ class BookSearchRepositoryImpl(
         db.bookSearchDao().deleteBook(book)
     }
 
+
     override fun getFavoriteBooks(): Flow<List<Book>> {
         return db.bookSearchDao().getFavoriteBooks()
-    }
-
-
-    private object PreferencesKeys {
-        val SORT_MODE = stringPreferencesKey("sort_mode")
     }
 
     override suspend fun saveSortMode(mode: String) {
@@ -103,5 +106,25 @@ class BookSearchRepositoryImpl(
         ).flow
     }
 
+    override suspend fun saveCacheDeleteMode(mode: Boolean) {
+        dataStore.edit { prefs ->
+            prefs[CACHE_DELETE_MODE] = mode
+        }
+    }
+
+    override suspend fun getCacheDeleteMode(): Flow<Boolean> {
+        return dataStore.data
+            .catch { exception ->
+                if(exception is IOException){
+                    exception.printStackTrace()
+                    emit(emptyPreferences())
+                }else{
+                    throw exception
+                }
+            }
+            .map { prefs ->
+                prefs[CACHE_DELETE_MODE] ?: false
+            }
+    }
 }
 

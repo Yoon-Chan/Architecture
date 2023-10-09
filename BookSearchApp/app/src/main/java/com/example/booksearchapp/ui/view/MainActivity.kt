@@ -3,6 +3,7 @@ package com.example.booksearchapp.ui.view
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -11,9 +12,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.WorkManager
 import com.example.booksearchapp.R
 import com.example.booksearchapp.data.db.BookSearchDatabase
-import com.example.booksearchapp.data.repository.BookSearchRepository
 import com.example.booksearchapp.data.repository.BookSearchRepositoryImpl
 import com.example.booksearchapp.databinding.ActivityMainBinding
 import com.example.booksearchapp.ui.viewmodel.BookSearchViewModel
@@ -25,28 +26,30 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var bookSearchViewModel: BookSearchViewModel
 
-    private lateinit var navController : NavController
-    private lateinit var appBarConfiguration : AppBarConfiguration
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     private val Context.dataStore by preferencesDataStore(DATASTORE_NAME)
+    private val workManager = WorkManager.getInstance(application)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-        setupJetpackNavigstion()
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.baseline_favorite_24)
+        setupJetpackNavigation()
 
         val bookSearchDatabase = BookSearchDatabase.getInstance(this)
         val bookSearchRepository = BookSearchRepositoryImpl(bookSearchDatabase, dataStore)
-        val factory = BookSearchViewModelProviderFactory(bookSearchRepository, this)
+        val factory = BookSearchViewModelProviderFactory(bookSearchRepository, workManager, this)
         bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java]
 
     }
 
-    private fun setupJetpackNavigstion(){
-        val host = supportFragmentManager.findFragmentById(R.id.booksearch_nav_host_fragment) as NavHostFragment
+    private fun setupJetpackNavigation() {
+        val host =
+            supportFragmentManager.findFragmentById(R.id.booksearch_nav_host_fragment) as NavHostFragment
         navController = host.navController
         binding.bottomNavigationView.setupWithNavController(navController)
 
@@ -55,11 +58,13 @@ class MainActivity : AppCompatActivity() {
             //navController.graph
 
             //전체 프래그먼트 탑레벨 설정
-            setOf(R.id.fragment_search, R.id.fragment_favorite, R.id.fragment_setting)
+            setOf(R.id.fragment_search)
         )
+
 
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()

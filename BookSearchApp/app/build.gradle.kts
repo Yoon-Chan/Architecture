@@ -109,4 +109,10 @@ dependencies {
     implementation("androidx.paging:paging-runtime:3.1.1")
 
 
+    //work manager
+    val work_version = "2.8.0"
+    // Kotlin + coroutines
+    implementation("androidx.work:work-runtime-ktx:$work_version")
+
+
 }
