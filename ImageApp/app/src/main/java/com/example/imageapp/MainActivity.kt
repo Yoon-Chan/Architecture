@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.imageapp.databinding.ActivityMainBinding
 import com.example.imageapp.mvc.MvcActivity
+import com.example.imageapp.mvp.MvpActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +24,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openMVP(){
-
+        val intent = Intent(this, MvpActivity::class.java)
+        startActivity(intent)
     }
 
     fun openMVVM(){
