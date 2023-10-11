@@ -7,7 +7,11 @@
 
         <variable
             name="view"
-            type="com.example.imageapp.mvp.MvpActivity" />
+            type="com.example.imageapp.mvvm.MvvmActivity" />
+
+        <variable
+            name="viewModle"
+            type="com.example.imageapp.mvvm.MvvmViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +33,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="96dp"
             android:scaleType="centerCrop"
+            app:image="@{viewModle.imageLiveData}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:onClick="@{() -> view.loadImage()}"
+            android:onClick="@{() -> viewModle.loadRandomImage()}"
             android:text="이미지 불러오기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,11 +56,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:text="@{viewModle.countLiveData}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="불러온 이미지 : 1" />
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
