@@ -2,6 +2,7 @@ package com.example.booksearchapp.ui.view
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.booksearchapp.databinding.FragmentSearchBinding
+import com.example.booksearchapp.ui.adapter.BookSearchAdapter
 import com.example.booksearchapp.ui.adapter.BookSearchLoadStateAdapter
 import com.example.booksearchapp.ui.adapter.BookSearchPagingAdapter
 import com.example.booksearchapp.ui.viewmodel.SearchViewModel
@@ -31,7 +33,7 @@ class SearchFragment : Fragment() {
     private val bookSearchViewModel by viewModels<SearchViewModel>()
     //private lateinit var bookSearchAdapter: BookSearchAdapter
 
-    private lateinit var bookSearchAdapter: BookSearchPagingAdapter
+    private lateinit var bookSearchAdapter: BookSearchAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,22 +54,26 @@ class SearchFragment : Fragment() {
 //            bookSearchAdapter.submitList(books)
 //        }
 
-        collectLatestStateFlow(bookSearchViewModel.searchPagingResult){
-            bookSearchAdapter.submitData(it)
+        collectLatestStateFlow(bookSearchViewModel.searchResult) { list ->
+            bookSearchAdapter.submitList(list)
         }
+
+//        collectLatestStateFlow(bookSearchViewModel.searchPagingResult){
+//            bookSearchAdapter.submitData(it)
+//        }
     }
 
     private fun setupLoadState(){
-        bookSearchAdapter.addLoadStateListener { combinedLoadStates ->
-            val loadState = combinedLoadStates.source
-            val isListEmpty = bookSearchAdapter.itemCount < 1
-                    && loadState.refresh is LoadState.NotLoading
-                    && loadState.append.endOfPaginationReached
-
-            binding.tvEmptyList.isVisible = isListEmpty
-            binding.rvSearchResult.isVisible = !isListEmpty
-
-            binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
+//        bookSearchAdapter.addLoadStateListener { combinedLoadStates ->
+//            val loadState = combinedLoadStates.source
+//            val isListEmpty = bookSearchAdapter.itemCount < 1
+//                    && loadState.refresh is LoadState.NotLoading
+//                    && loadState.append.endOfPaginationReached
+//
+//            binding.tvEmptyList.isVisible = isListEmpty
+//            binding.rvSearchResult.isVisible = !isListEmpty
+//
+//            binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
 
 //            binding.btnRetry.isVisible = loadState.refresh is LoadState.Error
 //                    || loadState.append is LoadState.Error
@@ -82,15 +88,16 @@ class SearchFragment : Fragment() {
 //
 //        binding.btnRetry.setOnClickListener {
 //            bookSearchAdapter.retry()
-        }
+    //       }
     }
 
     private fun setupRecyclerView() {
-        bookSearchAdapter = BookSearchPagingAdapter()
-        //binding.rvSearchResult.adapter = bookSearchAdapter
-        binding.rvSearchResult.adapter = bookSearchAdapter.withLoadStateFooter(
-            footer = BookSearchLoadStateAdapter(bookSearchAdapter::retry)
-        )
+        bookSearchAdapter = BookSearchAdapter()
+        //bookSearchAdapter = BookSearchPagingAdapter()
+        binding.rvSearchResult.adapter = bookSearchAdapter
+//        binding.rvSearchResult.adapter = bookSearchAdapter.withLoadStateFooter(
+//            footer = BookSearchLoadStateAdapter(bookSearchAdapter::retry)
+//        )
         binding.rvSearchResult.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
@@ -112,13 +119,15 @@ class SearchFragment : Fragment() {
             Editable.Factory.getInstance().newEditable(bookSearchViewModel.query)
 
         binding.etSearch.addTextChangedListener { text: Editable? ->
+            Log.e("BOOK_SEARCH_APP", text.toString())
             endTime = System.currentTimeMillis()
             if (endTime - startTime >= SEARCH_BOOKS_TIME_DELAY) {
                 text?.let {
                     val query = it.toString().trim()
                     if (query.isNotEmpty()) {
-                        //bookSearchViewModel.searchBooks(query)
-                        bookSearchViewModel.searchBooksPaging(query)
+
+                        bookSearchViewModel.searchBooks(query)
+                        //bookSearchViewModel.searchBooksPaging(query)
                         bookSearchViewModel.query = query
                     }
                 }

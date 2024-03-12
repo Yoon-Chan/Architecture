@@ -18,6 +18,10 @@
         <activity
             android:name=".ui.view.MainActivity"
             android:exported="true">
+            <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="${bookApiKey}" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

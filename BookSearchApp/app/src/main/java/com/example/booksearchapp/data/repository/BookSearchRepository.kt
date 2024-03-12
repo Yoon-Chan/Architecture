@@ -1,19 +1,19 @@
 package com.example.booksearchapp.data.repository
 
-import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
 import com.example.booksearchapp.data.model.Book
 import com.example.booksearchapp.data.model.SearchResponse
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 
 interface BookSearchRepository {
-    suspend fun searchBooks(
+    fun searchBooks(
         query: String,
         sort: String,
         page: Int,
         size: Int,
-    ): Response<SearchResponse>
+    ): Single<SearchResponse>
 
 
     //Room
@@ -36,7 +36,7 @@ interface BookSearchRepository {
     //paging
     fun getFavoritePagingBooks(): Flow<PagingData<Book>>
 
-    fun searchBooksPaging(query: String, sort: String): Flow<PagingData<Book>>
+    //fun searchBooksPaging(query: String, sort: String): Flow<PagingData<Book>>
 
 
 }

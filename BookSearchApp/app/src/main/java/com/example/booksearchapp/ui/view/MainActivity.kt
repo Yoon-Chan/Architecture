@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.baseline_favorite_24)
+        //supportActionBar?.setHomeAsUpIndicator(R.drawable.baseline_favorite_24)
         setupJetpackNavigation()
 
 //        val bookSearchDatabase = BookSearchDatabase.getInstance(this)

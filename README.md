@@ -7,7 +7,7 @@
 
 
 ## BookSearchApp
- + 책 검색 기능 앱 구현
+ + 카카오 API를 이용하여 도서 검색 기능을 구현하고 원하는 도서를 저장하여 검색을 안해도 Favorite Books 화면에 보이게 만들었다. 또한 검색을 했을 때 최신순, 정확도 순으로 볼 수 있도록 설정 화면에서 선택 가능하도록 구현했습니다.
 
 ### search(검색 부분)
 
@@ -23,9 +23,11 @@
 
   + ViewModel, ViewModelFactory
   + RecyclerView
+  + Pager
 
 + 상단 EditTextView를 사용하여 입력을 받을 때마다 검색한 결과를 보여주는 기능 구현
 + Retrofit을 이용하여 카카오 API와 연결하여 책의 정보를 받아와 해당 책에 맞는 이름을 리사이클러 뷰를 통해 보여주도록 하는 기능
++ 검색 결과가 없을 때는 
 
 __실행 결과__
 
@@ -49,4 +51,10 @@ __실행 결과__
 
 
 https://github.com/Yoon-Chan/Architecture/assets/56026214/b773b894-2dcd-4f4d-b5d8-586c286bd1fc
+
+
+
+---
+
+## Favorite Books 화면
 

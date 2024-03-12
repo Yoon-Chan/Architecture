@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/fragment_favorite"
         android:name="com.example.booksearchapp.ui.view.FavoriteFragment"
-        android:label=""
+        android:label="@string/favorite"
         tools:layout="@layout/fragment_favorite" >
         <action
             android:id="@+id/action_fragment_favorite_to_fragment_book"
