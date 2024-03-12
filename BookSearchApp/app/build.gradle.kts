@@ -18,7 +18,7 @@ properties.load(project.rootProject.file("local.properties").inputStream())
 
 // 2. local.properties 내부에서 key값을 가져오는 함수 구현방식
 fun getApiKey(propertyKey: String): String {
-    return gradleLocalProperties(rootDir).getProperty(propertyKey)
+    return gradleLocalProperties(rootDir).getProperty(propertyKey) ?: ""
 }
 
 android {
@@ -35,7 +35,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         android.buildFeatures.buildConfig = true
 
-        buildConfigField("String", "KAKAO_API_KEY", getApiKey("bookApiKey"))
+        buildConfigField("String", "KAKAO_API_KEY", properties["bookApiKey"].toString())
         //manifestPlaceholders["KAKAO_API_KEY"] = properties["bookApiKey"].toString()
     }
 
