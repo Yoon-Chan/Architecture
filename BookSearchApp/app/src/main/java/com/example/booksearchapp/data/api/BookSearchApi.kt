@@ -3,6 +3,7 @@ package com.example.booksearchapp.data.api
 import com.example.booksearchapp.data.model.SearchResponse
 import com.example.booksearchapp.util.Constant.API_KEY
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query

@@ -77,6 +77,7 @@ class FavoriteFragment : Fragment() {
             )
         )
         bookSearchAdapter.setOnItemClickListener {
+
             val action = FavoriteFragmentDirections.actionFragmentFavoriteToFragmentBook(it)
             findNavController().navigate(action)
         }
