@@ -38,7 +38,7 @@ object AppModule {
         return Interceptor { chain ->
             var request = chain.request()
             request = request.newBuilder()
-                .addHeader("Authorization", BuildConfig.KAKAO_API_KEY)
+                .addHeader("Authorization", "KakaoAK ${BuildConfig.KAKAO_API_KEY}")
                 .build()
             chain.proceed(request)
         }
