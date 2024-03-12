@@ -26,7 +26,7 @@ jobs:
       run: |
         cd BookSearchApp
         echo sdk.dir=~/Android/Sdk >> local.properties
-        echo bookApiKey=${{ secrets.BOOK_API_KEY }} >> local.prperties
+        echo bookApiKey=\"${{ secrets.BOOK_API_KEY }}\" >> local.prperties
         chmod +x gradlew
     - name: Build with Gradle
       run: |
