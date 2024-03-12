@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -8,6 +10,10 @@ plugins {
     id("com.google.dagger.hilt.android")
     kotlin("kapt")
 }
+
+// 선언 및 키값을 불러오기
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = "com.example.booksearchapp"
@@ -21,6 +27,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        android.buildFeatures.buildConfig = true
+
+        buildConfigField("String", "KAKAO_API_KEY", properties["bookApiKey"] as String)
+        manifestPlaceholders["KAKAO_API_KEY"] = properties["bookApiKey"] as String
     }
 
     buildTypes {
