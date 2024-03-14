@@ -19,6 +19,8 @@ import com.example.booksearchapp.data.repository.BookSearchRepositoryImpl.Prefer
 import com.example.booksearchapp.util.Constant.PAGING_SIZE
 import com.example.booksearchapp.util.Sort
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -63,16 +65,16 @@ class BookSearchRepositoryImpl @Inject constructor(
         val CACHE_DELETE_MODE = booleanPreferencesKey("cache_delete_mode")
     }
 
-    override suspend fun insertBooks(book: Book) {
-        db.bookSearchDao().insertBook(book)
+    override fun insertBooks(book: Book) : Completable {
+        return db.bookSearchDao().insertBook(book)
     }
 
-    override suspend fun deleteBooks(book: Book) {
-        db.bookSearchDao().deleteBook(book)
+    override fun deleteBooks(book: Book) : Completable {
+        return db.bookSearchDao().deleteBook(book)
     }
 
 
-    override fun getFavoriteBooks(): Flow<List<Book>> {
+    override fun getFavoriteBooks(): Flowable<List<Book>> {
         return db.bookSearchDao().getFavoriteBooks()
     }
 
@@ -98,18 +100,18 @@ class BookSearchRepositoryImpl @Inject constructor(
             }
     }
 
-    override fun getFavoritePagingBooks(): Flow<PagingData<Book>> {
-        val pagingSourceFactory = { db.bookSearchDao().getFavoritePagingBooks() }
-
-        return Pager(
-            config = PagingConfig(
-                pageSize = PAGING_SIZE,
-                enablePlaceholders = false,
-                maxSize = PAGING_SIZE * 3
-            ),
-            pagingSourceFactory = pagingSourceFactory
-        ).flow
-    }
+//    override fun getFavoritePagingBooks(): Flow<PagingData<Book>> {
+//        val pagingSourceFactory = { db.bookSearchDao().getFavoritePagingBooks() }
+//
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = PAGING_SIZE,
+//                enablePlaceholders = false,
+//                maxSize = PAGING_SIZE * 3
+//            ),
+//            pagingSourceFactory = pagingSourceFactory
+//        ).flow
+//    }
 
 
 //    override fun searchBooksPaging(query: String, sort: String): Flow<PagingData<Book>> {

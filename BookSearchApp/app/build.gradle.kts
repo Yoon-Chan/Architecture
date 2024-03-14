@@ -130,6 +130,8 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.5.0")
     ksp("androidx.room:room-compiler:2.5.0")
     implementation("androidx.room:room-paging:2.5.0")
+    // optional - RxJava3 support for Room
+    implementation("androidx.room:room-rxjava3:2.5.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 
