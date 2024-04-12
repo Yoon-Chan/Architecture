@@ -20,7 +20,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        //testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.booksearchapp.HiltTestRunner"
     }
 
     buildTypes {
@@ -74,6 +75,8 @@ dependencies {
     testImplementation("androidx.test:core:1.5.0")
     testImplementation("androidx.test.ext:truth:1.5.0")
     testImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation("junit:junit:4.12")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2")
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -90,6 +93,10 @@ dependencies {
     testImplementation ("org.robolectric:robolectric:4.12")
     // To use the JUnit Extension APIs
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    // For instrumented tests.
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.48")
+    // ...with Kotlin.
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.48")
 
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
