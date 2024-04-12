@@ -23,7 +23,7 @@ fun getApiKey(propertyKey: String): String {
 
 android {
     namespace = "com.example.booksearchapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.booksearchapp"
@@ -137,7 +137,12 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    implementation("androidx.paging:paging-runtime:3.1.1")
+    //paging3
+    implementation("androidx.paging:paging-runtime:3.2.1")
+    // optional - RxJava3 support
+    implementation ("androidx.paging:paging-rxjava3:3.2.1")
+    // alternatively - without Android dependencies for tests
+    testImplementation("androidx.paging:paging-common:3.2.1")
 
 
     //work manager

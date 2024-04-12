@@ -10,6 +10,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.rxjava3.*
 import com.example.booksearchapp.data.api.BookSearchApi
 import com.example.booksearchapp.data.db.BookSearchDatabase
 import com.example.booksearchapp.data.model.Book
@@ -100,21 +101,30 @@ class BookSearchRepositoryImpl @Inject constructor(
             }
     }
 
-//    override fun getFavoritePagingBooks(): Flow<PagingData<Book>> {
-//        val pagingSourceFactory = { db.bookSearchDao().getFavoritePagingBooks() }
-//
-//        return Pager(
-//            config = PagingConfig(
-//                pageSize = PAGING_SIZE,
-//                enablePlaceholders = false,
-//                maxSize = PAGING_SIZE * 3
-//            ),
-//            pagingSourceFactory = pagingSourceFactory
-//        ).flow
-//    }
+    override fun getFavoritePagingBooks(): Flowable<PagingData<Book>> {
+        val pagingSourceFactory = { db.bookSearchDao().getFavoritePagingBooks() }
+
+        return Pager(
+            //3가지 파라미터
+            //pageSIze = 뷰 홀더의 표시할 데이터가 모자라지 않을 정도의 값을 설정
+            //해당 값은 Constant에 정의되어 있다.(15로 설정)
+
+            //enablePlaceholders = true인 것은 repository에 전체 데이터 사이즈를 받아와서 placeholder를 미리 만들어 놓고
+            //화면에 표시되지 않는 항목을 null로 설정.
+            //여기서는 필요한 것만 로딩하도록 하기 위해 false로 설정
+
+            //maxSize = 페이저가 메모리에 최대로 가지고 있는 항목의 개수이다.
+            config = PagingConfig(
+                pageSize = PAGING_SIZE,
+                enablePlaceholders = false,
+                maxSize = PAGING_SIZE * 3
+            ),
+            pagingSourceFactory = pagingSourceFactory
+        ).flowable
+    }
 
 
-//    override fun searchBooksPaging(query: String, sort: String): Flow<PagingData<Book>> {
+//    override fun searchBooksPaging(query: String, sort: String): Single<PagingData<Book>> {
 //
 //        val pagingSourceFactory = { BookSearchPagingSource(api ,query, sort) }
 //

@@ -5,19 +5,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.rxjava3.*
 import com.example.booksearchapp.data.model.Book
 import com.example.booksearchapp.data.repository.BookSearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,10 +27,10 @@ class FavoriteViewModel @Inject constructor(
 ): ViewModel()
 {
     //paging
-//    val favoritePagingBooks: StateFlow<PagingData<Book>> =
-//        bookSearchRepository.getFavoritePagingBooks()
-//            .cachedIn(viewModelScope)
-//            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val favoritePagingBooks: Flowable<PagingData<Book>> =
+        bookSearchRepository.getFavoritePagingBooks()
+            .cachedIn(viewModelScope)
 
     private val _favoriteBooks = MutableStateFlow<List<Book>>(emptyList());
     val favoriteBooks = _favoriteBooks.asStateFlow()

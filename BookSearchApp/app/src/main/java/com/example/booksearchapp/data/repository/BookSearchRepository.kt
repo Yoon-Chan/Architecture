@@ -36,9 +36,8 @@ interface BookSearchRepository {
     suspend fun getCacheDeleteMode(): Flow<Boolean>
 
     //paging
-    //fun getFavoritePagingBooks(): Flow<PagingData<Book>>
-
-    //fun searchBooksPaging(query: String, sort: String): Flow<PagingData<Book>>
+    fun getFavoritePagingBooks(): Flowable<PagingData<Book>>
+    //fun searchBooksPaging(query: String, sort: String): Single<PagingData<Book>>
 
 
 }

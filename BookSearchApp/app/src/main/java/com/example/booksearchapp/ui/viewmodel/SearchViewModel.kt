@@ -5,19 +5,19 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.rxjava3.*
 import com.example.booksearchapp.data.model.Book
 import com.example.booksearchapp.data.repository.BookSearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,6 +37,13 @@ class SearchViewModel @Inject constructor(
     val searchPagingResult: StateFlow<PagingData<Book>> = _searchPagingResult.asStateFlow()
 
     private val disposable = CompositeDisposable()
+
+    //paging
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val favoritePagingBooks: Flowable<PagingData<Book>> =
+        bookSearchRepository.getFavoritePagingBooks()
+            .map { pagingData -> pagingData }
+            .cachedIn(viewModelScope)
 
     var query = String()
         set(value) {
