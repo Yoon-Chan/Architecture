@@ -9,8 +9,10 @@ import androidx.paging.rxjava3.*
 import com.example.booksearchapp.data.model.Book
 import com.example.booksearchapp.data.repository.BookSearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -69,15 +71,17 @@ class SearchViewModel @Inject constructor(
     }
 
 
-//    fun searchBooksPaging(query: String) {
-//        viewModelScope.launch {
-//            bookSearchRepository.searchBooksPaging(query, getSortMode())
-//                .cachedIn(viewModelScope)
-//                .collect {
-//                    _searchPagingResult.value = it
-//                }
-//        }
-//    }
+    fun searchBooksPaging(query: String) {
+        viewModelScope.launch {
+            disposable.add(bookSearchRepository.searchBooksPaging(query, getSortMode())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    _searchPagingResult.value = it
+                }
+            )
+        }
+    }
 
     private suspend fun getSortMode() = withContext(Dispatchers.IO) {
         bookSearchRepository.getSortMode().first()

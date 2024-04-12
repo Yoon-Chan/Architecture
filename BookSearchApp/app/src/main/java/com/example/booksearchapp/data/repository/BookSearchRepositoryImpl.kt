@@ -124,19 +124,19 @@ class BookSearchRepositoryImpl @Inject constructor(
     }
 
 
-//    override fun searchBooksPaging(query: String, sort: String): Single<PagingData<Book>> {
-//
-//        val pagingSourceFactory = { BookSearchPagingSource(api ,query, sort) }
-//
-//        return Pager(
-//            config = PagingConfig(
-//                pageSize = PAGING_SIZE,
-//                enablePlaceholders = false,
-//                maxSize = PAGING_SIZE * 3
-//            ),
-//            pagingSourceFactory = pagingSourceFactory
-//        ).flow
-//    }
+    override fun searchBooksPaging(query: String, sort: String): Flowable<PagingData<Book>> {
+
+        val pagingSourceFactory = { BookSearchRxPagingSource(api ,query, sort) }
+
+        return Pager(
+            config = PagingConfig(
+                pageSize = PAGING_SIZE,
+                enablePlaceholders = false,
+                maxSize = PAGING_SIZE * 3
+            ),
+            pagingSourceFactory = pagingSourceFactory
+        ).flowable
+    }
 
     override suspend fun saveCacheDeleteMode(mode: Boolean) {
         dataStore.edit { prefs ->
