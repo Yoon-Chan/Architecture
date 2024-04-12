@@ -54,6 +54,9 @@ android {
         correctErrorTypes = true
     }
 
+    testOptions.unitTests{
+        isIncludeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -67,7 +70,11 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("junit:junit:4.12")
-    testImplementation("junit:junit:4.12")
+    testImplementation("androidx.test:runner:1.5.2")
+    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("androidx.test.ext:truth:1.5.0")
+    testImplementation("androidx.test.ext:junit:1.1.5")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     // To use the Truth Extension APIs
@@ -76,6 +83,13 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.5.2")
     // To use the androidx.test.core APIs
     androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2")
+
+    //Roboletric
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.robolectric:robolectric:4.12")
+    // To use the JUnit Extension APIs
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
 
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
