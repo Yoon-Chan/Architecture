@@ -1,52 +1,43 @@
 # Architecture
-안드로이드 아키텍쳐 관련 기능 구현
----
-
----
 
 
+## 카카오 API를 이용한 Modern Android Jetpack 라이브러리 사용하기
 
-## BookSearchApp
- + 책 검색 기능 앱 구현
+### :question: 프로젝트 설명
 
-### search(검색 부분)
+카카오 API를 이용해 책 검색 앱 프로젝트 만들기
 
-+ 사용 기술
+Jetpack 라이브러리들을 이용하여 손쉬운 라이브러리들을 이용해 Modern Android 개발하기
 
-  + Retrofit
+## 🛠 기술 스택 및 도구
 
-  + OkHttp
+## <img src="https://img.shields.io/badge/android-34A853?style=for-the-badge&logo=android&logoColor=white"><img src="https://img.shields.io/badge/androidstudio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white"><img src="https://img.shields.io/badge/kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white"><img src="https://img.shields.io/badge/githubactions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"><img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/Kakao-FFCD00?style=for-the-badge&logo=Kakao&logoColor=white">
 
-  + Gson
-
-  + repository
-
-  + ViewModel, ViewModelFactory
-  + RecyclerView
-
-+ 상단 EditTextView를 사용하여 입력을 받을 때마다 검색한 결과를 보여주는 기능 구현
-+ Retrofit을 이용하여 카카오 API와 연결하여 책의 정보를 받아와 해당 책에 맞는 이름을 리사이클러 뷰를 통해 보여주도록 하는 기능
-
-__실행 결과__
-
-
-https://github.com/Yoon-Chan/Architecture/assets/56026214/c74d8645-4620-43a2-bb79-632c8d7ce589
+| 기술 스택             |                                                              |
+| --------------------- | ------------------------------------------------------------ |
+| 안드로이드 라이브러리 | Modern Android, Jetpack Library, Hilt, Room, Datastore, Paging3, Flow, RxJava |
+| 아키텍처              | MVVM                                                         |
+| CI/CD                 | Github Actions                                               |
 
 
 
-#### 검색 클릭 시 웹 뷰 이동
+## :pushpin: 구현 내용
 
-+ 사용 기술
-  + jetpack navigation
-  + webView
-+ 검색하고 나온 리스트들을 클릭 시 해당 책에 맞는 url로 이동하는 기능 구현
-+ 여기서 배운 점
-  + 앱바와 jetpack navigation을 연결하는 방법을 알았다. (AppBarConfiguration), 다만 이걸 사용하려면 AppBar가 있어야 사용이 가능
-  + 프래그먼트 이동 시 args를 받아 사용하는 방법을 배움(Parcelable을 이용해 데이터 클래스 전달)
+## 1. 책 검색 화면
 
-__실행 결과__
+| 검색 화면 | 웹뷰 이동 |
+| --------- | --------- |
+|           |           |
 
 
 
-https://github.com/Yoon-Chan/Architecture/assets/56026214/b773b894-2dcd-4f4d-b5d8-586c286bd1fc
+## 2. 책 저장 및 삭제
+
+| 책 저장하기 | 저장된 책 정보 삭제하기 | 삭제된 정보 복구 |
+| ----------- | ----------------------- | ---------------- |
+|             |                         |                  |
+
+
+
+## 3. 인터넷 연결 끊길 때 리사이클러 뷰
 

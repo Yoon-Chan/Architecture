@@ -58,6 +58,7 @@ android {
     testOptions.unitTests{
         isIncludeAndroidResources = true
     }
+    testOptions.animationsDisabled =true
 }
 
 dependencies {
@@ -80,6 +81,7 @@ dependencies {
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
     // To use the Truth Extension APIs
     androidTestImplementation("androidx.test.ext:truth:1.5.0")
     // To use the androidx.test.runner APIs
@@ -87,6 +89,7 @@ dependencies {
     // To use the androidx.test.core APIs
     androidTestImplementation("androidx.test:core:1.5.0")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2")
+    androidTestImplementation ("org.hamcrest:hamcrest:2.2")
 
     //Roboletric
     testImplementation ("junit:junit:4.13.2")
