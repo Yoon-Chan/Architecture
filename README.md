@@ -9,6 +9,9 @@
 
 Jetpack 라이브러리들을 이용하여 손쉬운 라이브러리들을 이용해 Modern Android 개발하기
 
+#### 노션
+https://www.notion.so/4adee46d8d38441182a1e37213ec5bf2
+
 ## 🛠 기술 스택 및 도구
 
 ## <img src="https://img.shields.io/badge/android-34A853?style=for-the-badge&logo=android&logoColor=white"><img src="https://img.shields.io/badge/androidstudio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white"><img src="https://img.shields.io/badge/kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white"><img src="https://img.shields.io/badge/githubactions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"><img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/Kakao-FFCD00?style=for-the-badge&logo=Kakao&logoColor=white">
