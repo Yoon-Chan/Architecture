@@ -27,7 +27,7 @@ Jetpack 라이브러리들을 이용하여 손쉬운 라이브러리들을 이�
 
 | 검색 화면 | 웹뷰 이동 |
 | --------- | --------- |
-|           |           |
+|     ![search](https://github.com/Yoon-Chan/Architecture/assets/56026214/5f5ff633-3cc0-4dc3-be63-b68f426b9d92)|     ![webView](https://github.com/Yoon-Chan/Architecture/assets/56026214/7d326114-04e8-46b7-af88-c12728e4f4a2)|
 
 
 
@@ -35,9 +35,15 @@ Jetpack 라이브러리들을 이용하여 손쉬운 라이브러리들을 이�
 
 | 책 저장하기 | 저장된 책 정보 삭제하기 | 삭제된 정보 복구 |
 | ----------- | ----------------------- | ---------------- |
-|             |                         |                  |
+|      ![save](https://github.com/Yoon-Chan/Architecture/assets/56026214/ad7e2e25-6474-4343-b893-44f9a4ec6f5c) |       ![delete](https://github.com/Yoon-Chan/Architecture/assets/56026214/bd1fd74a-01eb-404d-9518-0c69ec9129ae)     |        ![restore](https://github.com/Yoon-Chan/Architecture/assets/56026214/94655ca6-c2c9-4d36-a072-c445bd4dd3e1) |
 
 
 
 ## 3. 인터넷 연결 끊길 때 리사이클러 뷰
 
+![internet](https://github.com/Yoon-Chan/Architecture/assets/56026214/8eaaacbf-cf4f-4eef-8c43-29f191674959)
+
+## 4. 기타 기능
++ 슬라이드를 이용하여 저장된 좋아요 책 정보 삭제
++ 스낵바를 이용하여 삭제 취소 기능 구현
++ 페이징을 이용하여 데이터 효율적으로 가져오기
